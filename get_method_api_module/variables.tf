@@ -30,3 +30,9 @@ variable "lambda_zip_file" {
   description = "Path to the zip file containing the Lambda function code."
   type        = string
 }
+
+variable "log_retention_days" {
+  type        = number
+  description = "The number of days to retain log events in the CloudWatch Logs Log Group."
+  default     = 14
+}

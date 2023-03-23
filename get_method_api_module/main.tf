@@ -75,3 +75,16 @@ resource "aws_api_gateway_deployment" "get_method_deployment" {
   stage_name  = "prod"
 }
 
+resource "aws_cloudwatch_log_group" "get_method_lambda_log_group" {
+  name              = "/aws/lambda/${aws_lambda_function.get_method_lambda.function_name}"
+  retention_in_days = var.log_retention_days
+}
+
+resource "aws_lambda_permission" "apigw_lambda_permission" {
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.get_method_lambda.function_name
+  principal     = "apigateway.amazonaws.com"
+
+  source_arn = "${aws_api_gateway_rest_api.get_method_api.execution_arn}/*/*"
+  depends_on = [aws_cloudwatch_log_group.get_method_lambda_log_group]
+}
