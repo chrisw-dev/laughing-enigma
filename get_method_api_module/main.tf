@@ -60,14 +60,6 @@ resource "aws_api_gateway_integration" "get_method_lambda_integration" {
   uri                     = aws_lambda_function.get_method_lambda.invoke_arn
 }
 
-resource "aws_lambda_permission" "apigw_lambda_permission" {
-  action        = "lambda:InvokeFunction"
-  function_name = aws_lambda_function.get_method_lambda.function_name
-  principal     = "apigateway.amazonaws.com"
-
-  source_arn = "${aws_api_gateway_rest_api.get_method_api.execution_arn}/*/*"
-}
-
 resource "aws_api_gateway_deployment" "get_method_deployment" {
   depends_on = [aws_api_gateway_integration.get_method_lambda_integration]
 
