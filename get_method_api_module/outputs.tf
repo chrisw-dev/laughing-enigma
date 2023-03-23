@@ -14,6 +14,6 @@ output "lambda_function_arn" {
 }
 
 output "cloudwatch_log_group_name" {
-  value       = aws_lambda_function.get_method_lambda.name
+  value       = aws_cloudwatch_log_group.get_method_lambda_log_group.name
   description = "The name of the CloudWatch Logs Log Group for the Lambda function"
 }
