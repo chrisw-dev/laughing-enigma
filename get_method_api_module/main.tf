@@ -25,10 +25,11 @@ resource "aws_iam_role_policy_attachment" "lambda_policy_attachment" {
 }
 
 resource "aws_lambda_function" "get_method_lambda" {
-  function_name = var.lambda_function_name
-  handler       = var.lambda_handler
-  role          = aws_iam_role.lambda_role.arn
-  runtime       = var.lambda_runtime
+  function_name    = var.lambda_function_name
+  handler          = var.lambda_handler
+  role             = aws_iam_role.lambda_role.arn
+  runtime          = var.lambda_runtime
+  source_code_hash = filebase64sha256(var.lambda_zip_file)
 
   filename = var.lambda_zip_file
 }
