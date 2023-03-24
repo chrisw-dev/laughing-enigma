@@ -57,15 +57,15 @@ resource "aws_apigatewayv2_route" "get_method_route" {
 }
 
 resource "aws_lambda_permission" "apigw_lambda_permission" {
-action = "lambda:InvokeFunction"
-function_name = aws_lambda_function.get_method_lambda.function_name
-principal = "apigateway.amazonaws.com"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.get_method_lambda.function_name
+  principal     = "apigateway.amazonaws.com"
 
-source_arn = "${aws_apigatewayv2_api.get_method_api.execution_arn}/*"
+  source_arn = "${aws_apigatewayv2_api.get_method_api.execution_arn}/*"
 }
 
 resource "aws_apigatewayv2_stage" "get_method_api_stage" {
-api_id = aws_apigatewayv2_api.get_method_api.id
-name = "default"
-auto_deploy = true
+  api_id      = aws_apigatewayv2_api.get_method_api.id
+  name        = "default"
+  auto_deploy = true
 }
