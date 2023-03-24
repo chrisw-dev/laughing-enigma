@@ -1,6 +1,6 @@
 output "api_gateway_invoke_url" {
-value = aws_apigatewayv2_api.get_method_api.api_endpoint
-description = "The base URL to invoke the API Gateway"
+  value       = "${aws_apigatewayv2_api.get_method_api.api_endpoint}/default/"
+  description = "The base URL to invoke the API Gateway"
 }
 
 output "lambda_function_name" {
