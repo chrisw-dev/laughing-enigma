@@ -65,7 +65,17 @@ resource "aws_lambda_permission" "apigw_lambda_permission" {
 }
 
 resource "aws_apigatewayv2_stage" "get_method_api_stage" {
-  api_id      = aws_apigatewayv2_api.get_method_api.id
-  name        = "default"
+  api_id = aws_apigatewayv2_api.get_method_api.id
+  name   = "default"
   auto_deploy = true
+
+  access_log_settings {
+    destination_arn = aws_cloudwatch_log_group.api_gateway_access_logs.arn
+    format          = "$context.identity.sourceIp - - [$context.requestTime] \"$context.httpMethod $context.routeKey $context.protocol\" $context.status $context.responseLength $context.requestId \"$context.userAgent\" \"$context.identity.caller\" \"$context.identity.user\" $context.elapsedTime $context.integrationStatus"
+  }
+}
+
+resource "aws_cloudwatch_log_group" "api_gateway_access_logs" {
+  name              = "${var.project_name}_api_gateway_access_logs"
+  retention_in_days = var.log_retention_days
 }
