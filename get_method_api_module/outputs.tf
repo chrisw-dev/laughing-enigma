@@ -1,6 +1,6 @@
 output "api_gateway_invoke_url" {
-  value       = "https://${aws_api_gateway_rest_api.get_method_api.id}.execute-api.${var.aws_region}.amazonaws.com/prod"
-  description = "The base URL to invoke the API Gateway"
+value = aws_apigatewayv2_api.get_method_api.api_endpoint
+description = "The base URL to invoke the API Gateway"
 }
 
 output "lambda_function_name" {
