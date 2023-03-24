@@ -71,7 +71,7 @@ resource "aws_apigatewayv2_stage" "get_method_api_stage" {
 
   access_log_settings {
     destination_arn = aws_cloudwatch_log_group.api_gateway_access_logs.arn
-    format          = "$context.identity.sourceIp - - [$context.requestTime] \"$context.httpMethod $context.routeKey $context.protocol\" $context.status $context.responseLength $context.requestId \"$context.userAgent\" \"$context.identity.caller\" \"$context.identity.user\" $context.elapsedTime $context.integrationStatus"
+    format          = "$context.identity.sourceIp - - [$context.requestTime] \"$context.httpMethod $context.routeKey $context.protocol\" $context.status $context.responseLength $context.requestId \"$context.identity.userAgent\" \"$context.identity.caller\" \"$context.identity.user\" $context.integrationStatus"
   }
 }
 
