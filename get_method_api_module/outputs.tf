@@ -22,3 +22,8 @@ output "api_gateway_access_logs_log_group_name" {
   value       = aws_cloudwatch_log_group.api_gateway_access_logs.name
   description = "The name of the CloudWatch Logs Log Group for the API Gateway access logs"
 }
+
+output "lambda_role_name" {
+  value       = aws_iam_role.lambda_role.name
+  description = "The name of the IAM role for the created Lambda"
+}
